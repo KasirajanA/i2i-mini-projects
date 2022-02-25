@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <title>BookingSeat</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+      li {
+        float: right;
+      }
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 8px 16px;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+        <li><a class="active" href="{% url 'user' %}">Home</a></li>
+      </ul>
+    <h1 align = "center">Booking</h1>
+    <table align = "center" cellpadding = "6">
+    <form action="{% url 'ticket' %}" method="POST">
+        {% csrf_token %}
+      <thead>
+        <tr>
+          <th>SEAT-NO</th>
+          <th>STATUS-ID</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        {% for seat in seats %}
+        <tr>
+          <td>{{seat.id}}</td>
+          <td>{{seat.seat_reference }}</td>
+          <td><input type="checkbox"  name="tickets" value = {{seat.id}}>Book<br></td>
+          </td>
+        </tr>
+        
+        <input type="hidden" name="show_id" value = {{seat.show_id}}>
+        <input type="hidden" name="price" value = {{seat.price}}>
+        {% endfor %}
+       
+        <input type="hidden" name="customer_id" value = {{customer_id}}>
+      </tbody>
+      <input type="submit" value="Submit"></form>
+    </table>
+  </body>
+</html>
+

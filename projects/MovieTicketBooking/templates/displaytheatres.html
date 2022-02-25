@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <title>ShowTheatres</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+      li {
+        float: right;
+      }
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 8px 16px;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li><a class="active" href="{% url 'admins' %}">Home</a></li>
+    </ul>
+    <h1 align="center">Theatres</h1>
+    <table align="center" cellpadding="6">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>NAME</th>
+          <th>LOCATION</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for theatre in theatres %}
+        <tr>
+          <td>{{theatre.id}}</td>
+          <td>{{theatre.name}}</td>
+          <td>{{theatre.location}}</td>
+          <td>
+            <a href="{% url 'deletetheatre' theatre.id%}">delete</a>
+            <a href="{% url 'updatetheatres' theatre.id%}">update</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

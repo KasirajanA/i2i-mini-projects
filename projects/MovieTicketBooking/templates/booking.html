@@ -1,0 +1,78 @@
+<html>
+  <head>
+    <title>ShowMovies</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+      li {
+        float: right;
+      }
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 8px 16px;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li><a class="active" href="{% url 'admins' %}">Home</a></li>
+    </ul>
+    <h1 align="center">Movies</h1>
+    <table align="center" cellpadding="6">
+      <thead>
+        <tr>
+            <th>MOVIE-NAME</th>
+            <th>THEATRE-NAME</th>
+            <th>SHOW-ID</th>
+            <th>SHOW-DATE</th>
+            <th>SHOW-TIME</th>
+            <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for movie in movies %}
+        {% for theatre in theatres %}
+        {% for screen in screens %}
+        {% for show in shows %}
+        {% for showcategory in show_category %}
+        {% if movie.id is show.movie_id %}
+        {% if screen.id is show.screen_id %}
+        {% if theatre.id is screen.theatre_id %}
+        <tr>
+            <td>{{movie.name}}</td>
+            <td>{{theatre.name}}</td>
+            <td>{{show.show_date}}</td>
+            <td>{{showcategory.show_time}}</td>
+            <td><a href="{% url 'bookingseat' show.id customer_id%}">Book</a></td>
+        </tr>
+        {% endif %}
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+        {% endfor %}
+        {% endfor %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
+
+
+
+

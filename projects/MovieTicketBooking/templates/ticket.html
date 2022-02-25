@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <title>ShowTickets</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+      li {
+        float: right;
+      }
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 8px 16px;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li><a class="active" href="{% url 'user' %}">Home</a></li>
+    </ul>
+    <h1 align="center">Ticket</h1>
+    <table align="center" cellpadding="6">
+      <thead>
+        <tr>
+          <th>CUSTOMER-ID</th>
+          <th>SHOW-TIME</th>
+          <th>SHOW-DATE</th>
+          <th>TOTAL-PRICE</th>
+          <th>SEAT-COUNT</th>
+          <th>SEAT-NO</th>
+          <th>THEATRE-NAME</th>
+          <th>THEATRE-LOCATION</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{customer_id}}</td>
+          <td>
+              {{show.show_time}}
+           </td>
+           <td>
+            {{show.show_date}}
+         </td>
+          <td>{{price}}</td>
+          <td>{{seat_count}}</td>
+          <td>{% for seat in seats %}
+              {{seat}}
+              {% endfor %}
+          </td>
+          <td>
+            {{theatre.name}}
+         </td>
+         <td>
+          {{theatre.location}}
+       </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
+
+{{ticket_details}}

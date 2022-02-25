@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BookMySeat</title>
+    <style>
+      .card {
+        border: 1px solid black;
+        width: 20%;
+        height: 40px;
+        text-align: center;
+        padding-top: 11px;
+        margin: auto;
+        border-radius: 10px;
+        box-shadow: 0 3px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+      .card:hover {
+        background-color: #04aa6d;
+        color: white;
+        opacity: 0.8;
+        transition: 0.95s;
+      }
+      a {
+        text-decoration: none;
+        color: black;
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+      .card a:hover {
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <h1 style="color: white; text-align: center">
+        Movie Ticket Booking System
+      </h1>
+    </ul>
+    <br />
+    <div class="card">
+      <a href="{% url 'admins' %}">Admin</a>
+    </div>
+    <br />
+    <div class="card">
+      <a href="{% url 'user' %}">User</a>
+    </div>
+  </body>
+</html>

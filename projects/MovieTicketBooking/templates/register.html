@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Registeration</title>
+    <style>
+      input {
+        padding: 7px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        width: 96%;
+      }
+      form {
+        position: relative;
+        left: 20%;
+        right: 20%;
+        width: 50%;
+        line-height: 2.2;
+      }
+      input[type="submit"] {
+        border: 1px solid black;
+        background-color: white;
+        color: black;
+        padding: 8px 80px;
+        font-size: 16px;
+        cursor: pointer;
+        background: #e7e7e7;
+        width: 100%;
+      }
+      button:hover {
+        background-color: #04aa6d;
+        color: white;
+      }
+
+      button {
+        margin-top: 12px;
+        height: 40px;
+        width: 100px;
+      }
+
+      a {
+        position: relative;
+        left: 20%;
+        margin-top: 12px;
+        height: 40px;
+        width: 100px;
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+      li {
+        float: right;
+      }
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 8px 16px;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li><a class="active" href="{% url 'user' %}">Home</a></li>
+    </ul>
+    <h1 style="text-align: center">Registration</h1>
+
+    <form action="{% url 'register' %}",name="registrationform" method="post">
+      {% csrf_token %}
+
+      <input type="text" name="name" placeholder="Name"  /><br />
+      <input type="email" name="email" placeholder="email" required/><br />
+      <input type="text" name="phonenumber" placeholder="PhoneNumber" required/><br />
+      <input type="text" name="username" placeholder="Username" required/><br />
+      <input type="password" name="password1" placeholder="Password" required/><br />
+      <input
+        type="password"
+        name="password2"
+        placeholder="Confirm Password"
+      /><br />
+      <input type="Submit" />
+    </form>
+
+    <div>
+      {% for message in messages %}
+      <h3>{{message}}</h3>
+      {% endfor %}
+    </div>
+  </body>
+</html>

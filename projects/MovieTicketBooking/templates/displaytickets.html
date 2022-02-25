@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <title>ShowTickets</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+      li {
+        float: right;
+      }
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 8px 16px;
+        text-decoration: none;
+      }
+      h2 {
+          text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li><a class="active" href="{% url 'user' %}">Home</a></li>
+    </ul>
+    <h1 align="center">Tickets</h1>
+    {% if tickets %}
+    <table align="center" cellpadding="6">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>CUSTOMER-ID</th>
+          <th>SHOW-ID</th>
+          <th>TOTAL-PRICE</th>
+          <th>SEAT-COUNT</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ticket in tickets %}
+        <tr>
+          <td>{{ticket.id}}</td>
+          <td>{{ticket.customer_id_id}}</td>
+          <td>{{ticket.show_id_id}}</td>
+          <td>{{ticket.total_price}}</td>
+          <td>{{ticket.seat_count}}</td>
+          <td><a href="{% url 'cancelticket' ticket.id%}">Delete</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+      <div>
+        <h2 >No Tickets Booked</h2>
+      </div>
+    {% endif %} 
+  </body>
+</html>

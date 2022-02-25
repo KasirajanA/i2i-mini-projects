@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>ShowMovies</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+      li {
+        float: right;
+      }
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 8px 16px;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li><a class="active" href="{% url 'admins' %}">Home</a></li>
+    </ul>
+    <h1 align="center">Movies</h1>
+    <table align="center" cellpadding="6">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>LANGUAGE</th>
+          <th>GENRE</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for movie in movie %}
+        <tr>
+          <td>{{movie.id}}</td>
+          <td>{{movie.name}}</td>
+          <td>{{movie.language}}</td>
+          <td>{{movie.genre}}</td>
+          <td>
+            <a href="{% url 'deletemovies' movie.id%}">delete</a>
+            <a href="{% url 'updatemovies' movie.id%}">update</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

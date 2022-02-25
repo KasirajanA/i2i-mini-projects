@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Customer</title>
+    <style>
+      .container {
+        width: 50%;
+        margin-left: 28%;
+        display: flex;
+        flex-wrap: wrap;
+        grid-template-columns: auto auto auto;
+        justify-items: center;
+        gap: 50px;
+      }
+      button:hover {
+        background-color: #04aa6d;
+        color: white;
+      }
+      button {
+        margin-top: 12px;
+        height: 40px;
+        width: 100px;
+      }
+      h1 {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Options</h1>
+    <div class="container">
+      <a href="{% url 'booking' customer_id  %}"><button>Book</button></a>
+    </div>
+    <div class="container">
+      <a href="{% url 'displayticket' customer_id %}"><button>Show</button></a>
+    </div>
+  </body>
+</html>

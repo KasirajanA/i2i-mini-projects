@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHM</title>
+    <style>
+        .title {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .content {
+            top: 20%;
+            left: 15%;
+            width: 70%;
+            height:50%;
+            position: absolute;
+            display: grid;
+            grid-template-columns: auto auto;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            background-color: #ededed;
+        }
+        
+        .grid-item {
+            padding: 20px;
+            width: 50%;
+            height:30%;
+            border: none;
+            margin: 20%;
+            text-align: center;
+            background-color: #f7f7f7;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .grid-item:hover {
+            box-shadow: 4px 8px 16px 4px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        
+        body {
+            background-color: #f7f7f7;
+        }
+        .register{
+            bottom: 15%;
+            left:42%;
+            position:absolute;
+        }
+        button {
+            width: 200px;
+            padding: 7%;
+            margin-right: 3%;
+            background-color: #ededed;
+            border: none;
+            cursor: pointer;
+            border-radius: 2%;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+          }
+    </style>
+</head>
+<body>
+      <div class="title">
+        <h1>Conference Hall Management</h1>
+      </div>
+      <div class="content">
+        <a href="{% url 'admin' %}"><button class="grid-item">Admin</button></a>
+        <a href="{% url 'login_form' %}"><button class="grid-item">Employee</button></a>
+      </div>
+      <div class="register"><a href="{% url 'register' %}"><button>Register new user</button></a></div>
+</body>
+</html>

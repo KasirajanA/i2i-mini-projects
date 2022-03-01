@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .grid-container {
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 5%;
+        display: grid;
+        grid-template-columns: auto auto auto;
+      }
+      .container {
+        width: 70%;
+        margin-left: 15%;
+        margin-bottom: 10%;
+        padding-bottom: 5%;
+        text-align: center;
+        border-radius: 2%;
+        border: none;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+      .title {
+        width: 100%;
+        text-align: center;
+      }
+      body {
+        background-color: #f7f7f7;
+      }
+      .btn {
+        width: 100%;
+        text-align: right;
+      }
+      button {
+        padding: 1%;
+        margin-right: 3%;
+        background-color: #ededed;
+        border: none;
+        cursor: pointer;
+        border-radius: 2%;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+      .option-btn{
+        padding: 3%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="title">
+      <h1>Admin Panel</h1>
+    </div>
+    <div class="btn">
+      <a href="{% url 'home'%}"><button>Back</button></a>
+    </div>
+    <div class="grid-container">
+      <div class="container">
+        <h3>Companies</h3>
+        <a href="{% url 'add' %}"><button class="option-btn">Add</button></a>
+        <a href="{% url 'getcompanies'%}"
+          ><button class="option-btn">Display</button></a
+        >
+      </div>
+      <div class="container">
+        <h3>Conference Halls</h3>
+        <a href="{% url 'addhall' %}"
+          ><button class="option-btn">Add</button></a
+        >
+        <a href="{% url 'gethalls'%}"
+          ><button class="option-btn">Display</button></a
+        >
+      </div>
+      <div class="container">
+        <h3>Slot</h3>
+        <a href="{% url 'addslot' %}"
+          ><button class="option-btn">Add</button></a
+        >
+        <a href="{% url 'getslots'%}"
+          ><button class="option-btn">Display</button></a
+        >
+      </div>
+      <div class="container">
+        <h3>Employees</h3>
+        
+        <a href="{% url 'showemployees'%}"
+          ><button class="option-btn">Display</button></a>
+      </div>
+      <div class="container">
+        <h3>Bookings</h3>
+        <a href="{% url 'booking:showbookings'%}"
+          ><button class="option-btn">Display</button></a>
+      </div>
+    </div>
+  </body>
+</html>

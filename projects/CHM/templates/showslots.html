@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .header {
+        width: 100%;
+        height: 25%;
+        text-align: center;
+      }
+      .btn {
+        width: 100%;
+        text-align: right;
+      }
+      button {
+        padding: 1%;
+        margin-right: 3%;
+        background-color: #ededed;
+        border: none;
+        cursor: pointer;
+        border-radius: 2%;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+      body {
+        background-color: #f7f7f7;
+      }
+      .content {
+        top: 25%;
+        left: 25%;
+        position: absolute;
+      }
+      .table tr:nth-child(even) {
+        background-color: #ededed;
+      }
+
+      .table td,
+      th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+      .table {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Slots</h1>
+    </div>
+    <div class="btn">
+      <a href="{% url 'admin'%}"><button>Back</button></a>
+    </div>
+    <div class="content">
+      <table class="table">
+        <tr>
+          <td>Id</td>
+          <td>Hall</td>
+          <td>Booking Date</td>
+          <td>Start Time</td>
+          <td>End Time</td>
+          <td>Booking Status</td>
+          <td>Action</td>
+        </tr>
+        {% for slot in slots %}
+        <tr>
+          <td>{{slot.id}}</td>
+          <td>{{slot.hall_id.name}}</td>
+          <td>{{slot.booking_date}}</td>
+          <td>{{slot.start_time}}</td>
+          <td>{{slot.end_time}}</td>
+          <td>{{slot.booking_status}}</td>
+          <td><a href="{% url 'deleteslot' slot.id%}">delete</a> </td>
+        </tr>
+
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>

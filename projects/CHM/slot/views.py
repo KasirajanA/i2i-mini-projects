@@ -1,13 +1,11 @@
 import logging
 
-from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import serializers
 
-from slot.forms import SlotForm
 from slot.models import Slot
 from slot.serializers import SlotSerializers
+
 
 logger = logging.getLogger(__name__)
 
@@ -23,8 +21,9 @@ def fetch_slots(request):
     Returns:
     response
     """
-    slots = Slot.objects.all()
+    slots = Slot.objects.values()
     if not slots:
+        logger.info("No Slots present")
         return Response("No data to show")
     return Response(slots)
             
@@ -41,10 +40,12 @@ def add_slots(request):
     """
 
     if not request.data:
-       return Response("No data to create")
+        logger.warning("No data received")
+        return Response("No data to create")
     serializer = serializer_class(data=request.data)
     serializer.is_valid(raise_exception=True)
     serializer.save()
+    logger.info("Slot created")
     return Response(serializer.data)
 
 
@@ -62,7 +63,9 @@ def delete_slot(request, id):
     try: 
         slot = Slot.objects.get(id=id)
         slot.delete()
+        logger.info("Slot deleted")
     except Slot.DoesNotExist:
+        logger.warning("Slot id does not exists")
         return Response("Slot id does not exists")     
     return Response("deleted")  
      
@@ -80,6 +83,7 @@ def update_slot(request, id):
         response
         """  
     if not request.data:
+        logger.warning("No data received")
         return Response("No data to update")
     else:
         try:     
@@ -87,7 +91,9 @@ def update_slot(request, id):
             serializer = serializer_class(instance, data = request.data)
             serializer.is_valid(raise_exception=True)  
             serializer.save()
+            logger.info("Slot updated")
         except Slot.DoesNotExist:
+            logger.warning("Slot id does not exists")
             return Response("Slot id does not exists")               
     return Response('success')   
 

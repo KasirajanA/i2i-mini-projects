@@ -8,8 +8,8 @@ from company.models import Company
 from employee.models import Employee
 from employee.serializers import EmployeeSerializers
 
-logger = logging.getLogger(__name__)
 
+logger = logging.getLogger(__name__)
 
 @api_view(['POST'])
 def employee_login(request):
@@ -29,10 +29,10 @@ def employee_login(request):
         if check_password(request.data.get('password'), employee_data.password):
             return Response("Success")
         else:
-            print(request.data.get('password'))
+            logger.warning("Password does not match")
             return Response("Password does not match")
-    except Exception as exception:
-        logger.exception(exception)
+    except Employee.DoesNotExist:
+        logger.warning("Invalid Email ID")
         return Response("Email does not exist")
 
 
@@ -48,25 +48,28 @@ def employee_registration(request):
     """
 
     if not request.data:
+        logger.info("No data found")
         return Response("No data found")
     try:
         if request.data.get("password1") != request.data.get("password2"):
-            return Response('Password does not match')    
+            logger.warning("Passwords does not match")
+            return Response("Password does not match")    
                 
         
-        if Employee.objects.filter(email = request.data['email']).exists():
-            return Response('Email already exists')                      
+        if Employee.objects.filter(email = request.data["email"]).exists():
+            logger.warning("Email already exists")
+            return Response("Email already exists")                      
         else:
-            company = Company.objects.get(name= request.data['company'])
-            emp = dict(name = request.data['name'], email = request.data['email'],
+            company = Company.objects.get(name= request.data["company"])
+            emp = dict(name = request.data["name"], email = request.data["email"],
                 company = company.id,
-                password = make_password(request.data['password1'])) 
+                password = make_password(request.data["password1"])) 
             serializer_class = EmployeeSerializers
             serializer = serializer_class(data=emp)
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response("Registered successfully")
             
-    except Exception as exception:
-        logger.exception(exception)
-        return Response("Cannot register")      
+    except Company.DoesNotExist:
+        logger.error("Company name not found")
+        return Response("Company name not found")      

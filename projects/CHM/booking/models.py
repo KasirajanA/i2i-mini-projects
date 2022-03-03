@@ -7,7 +7,11 @@ class Booking(models.Model):
 
     team_name = models.CharField(max_length=50)
     members = models.IntegerField()
-    slot_id = models.ForeignKey(Slot, on_delete = models.CASCADE)
-    employee_id = models.ForeignKey(Employee, on_delete = models.CASCADE)
+    slot = models.ForeignKey(Slot, on_delete = models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete = models.CASCADE)
+    booking_date = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "booking"

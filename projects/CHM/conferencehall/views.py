@@ -1,11 +1,8 @@
 import logging
 
-from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import serializers
 
-from conferencehall.forms import ConferenceHallForm
 from conferencehall.models import ConfernceHall
 from conferencehall.serializers import ConferenceHallSerializers
 
@@ -24,8 +21,9 @@ def fetch_conference_halls(request):
     response
     """
 
-    confernce_hall = ConfernceHall.objects.all()
+    confernce_hall = ConfernceHall.objects.values()
     if not confernce_hall:
+        logger.info("No Conference halls present")
         return Response("No data to show")
     return Response(confernce_hall)
             
@@ -42,10 +40,12 @@ def add_conference_hall(request):
     """
 
     if not request.data:
-       return Response("No data to create")
+        logger.warning("No data received")
+        return Response("No data to create")
     serializer = serializer_class(data=request.data)
     serializer.is_valid(raise_exception=True)
     serializer.save()
+    logger.info("Hall created")
     return Response(serializer.data)
 
 
@@ -64,7 +64,9 @@ def delete_conference_hall(request, id):
     try: 
         confernce_hall = ConfernceHall.objects.get(id=id)
         confernce_hall.delete()
+        logger.info("Hall deleted")
     except ConfernceHall.DoesNotExist:
+        logger.warning("Conference hall id does not exists")
         return Response("Conference hall id does not exists")     
     return Response("deleted")  
      
@@ -82,6 +84,7 @@ def update_conference_hall(request, id):
     """
 
     if not request.data:
+        logger.warning("No data received")
         return Response("No data to update")
     else:
         try:     
@@ -89,6 +92,8 @@ def update_conference_hall(request, id):
             serializer = serializer_class(instance, data = request.data)
             serializer.is_valid(raise_exception=True) 
             serializer.save()
+            logger.info("Conference hall updated")
         except ConfernceHall.DoesNotExist:
+            logger.warning("Conference hall id does not exists")
             return Response("Conference hall id does not exists")               
     return Response('success')            

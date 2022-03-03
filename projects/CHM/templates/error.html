@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .title{
+            width: 100%;
+            margin-top: 5%;
+            text-align: center;
+        }
+        .content{
+            width: 70%;
+            height:200px;
+            margin-top: 2%;
+            margin-left: 10%;
+            margin-right: 10%;
+            padding: 5%;
+            background-color: #ededed;
+            padding-bottom: 1%;
+            border-radius: 2%;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+        body {
+            background-color: #f7f7f7;
+          }
+          button {
+            padding: 1%;
+            margin-top: 5%;
+            margin-left: 44%;
+            background-color: #ededed;
+            border: none;
+            cursor: pointer;
+            border-radius: 2%;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+          }
+    </style>
+  </head>
+  <body>
+    <div class="title"><h1>Error!!!</h1></div> 
+    <div class="content">
+        {{exception}} 
+    </div>
+    <div><a href="{% url 'home' %}"><button>Back to Home</button></a></div>
+  </body>
+</html>

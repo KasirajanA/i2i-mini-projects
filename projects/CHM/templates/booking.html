@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .wrapper {
+        background-color: #ededed;
+        top: 30%;
+        position: absolute;
+        width: 50%;
+        padding-bottom: 1%;
+        border-radius: 2%;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+      .data {
+        margin-top: 5%;
+        width: 80%;
+        margin-left: 10%;
+      }
+      input[type="text"],
+      input[type="date"],
+      input[type="email"],
+      input[type="number"],
+      select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      button[type="submit"] {
+        width: 50%;
+        padding: 14px 20px;
+        border: none;
+        margin: 8px 0;
+        margin-left: 25%;
+        border-radius: 4px;
+        cursor: pointer;
+        background-color: #f7fafa;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      }
+      .content {
+        width: 50%;
+        margin-left: 25%;
+      }
+
+      .title {
+        width: 100%;
+        text-align: center;
+      }
+      button {
+        padding: 2%;
+        margin-right: 3%;
+        background-color: #ededed;
+        border: none;
+        cursor: pointer;
+        border-radius: 2%;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+      .btn {
+        width: 100%;
+        text-align: right;
+      }
+      body {
+        background-color: #f7f7f7;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <div class="title">
+        <h1>Add New Booking</h1>
+      </div>
+      <div class="btn">
+        <a href="{% url 'employeepanel' employee_id %}"><button>Back</button></a>
+      </div>
+      <div class="wrapper">
+        <div class="data">
+          <form action="{% url 'booking:booking' %}" method="POST">
+            {% csrf_token %}
+            <label>Employee ID:</label>
+            <input type="number" name="employee_id"  value="{{employee_id}}"/>
+            <label>Team Name:</label>
+            <input type="text" name="team_name" required/>
+            <label>Capacity:</label>
+            <input type="number" name="members" required/>
+            <label>Slot:</label>
+            <select name="slot_id">
+                {% for slot in slots %}
+                <option value={{slot.id}}>{{slot.start_time}} to {{slot.end_time}} - {{slot.hall_id.name}}</option>
+                {% endfor %}
+              </select>
+            <button type="submit">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+   
+  </body>
+</html>

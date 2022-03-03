@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Index</title>
+    <style>
+      .wrapper {
+        background-color: #ededed;
+        top: 30%;
+        position: absolute;
+        width: 50%;
+        padding-bottom: 1%;
+        border-radius: 2%;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+
+      .data {
+        margin-top: 5%;
+        width: 80%;
+        margin-left: 10%;
+      }
+      input[type="text"],
+      input[type="date"],
+      input[type="email"] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      button[type="submit"] {
+        width: 50%;
+        padding: 14px 20px;
+        border: none;
+        margin: 8px 0;
+        margin-left: 25%;
+        border-radius: 4px;
+        cursor: pointer;
+        background-color: #f7fafa;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      }
+      .btn {
+        width: 100%;
+        text-align: right;
+      }
+      .content {
+        width: 50%;
+        margin-left: 25%;
+      }
+
+      .title {
+        width: 100%;
+        text-align: center;
+      }
+      button {
+        padding: 2%;
+        margin-right: 3%;
+        background-color: #ededed;
+        border: none;
+        cursor: pointer;
+        border-radius: 2%;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+      body {
+        background-color: #f7f7f7;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <div class="title">
+        <h1>Add Company</h1>
+      </div>
+      <div class="btn">
+        <a href="{% url 'admin' %}"><button>Back</button></a>
+    </div>
+      <div class="wrapper">
+        <div class="data">
+          <form action="post" method="POST" >
+            {% csrf_token %} {{form}}
+            <button type="submit"   >Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
